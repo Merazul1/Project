@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +28,7 @@ public class SecondPage1 extends HttpServlet {
 	
 	 private Connection connect = null;
 	  private Statement statement = null;
-	  private PreparedStatement preparedStatement = null;
+	 //  private PreparedStatement preparedStatement = null;
 	  private ResultSet resultSet = null;
        
    
@@ -40,35 +41,44 @@ public class SecondPage1 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
-		// TODO Auto-generated method stub
-		try
-	    {
-	      // create our mysql database connection
-	      String myDriver = "org.gjt.mm.mysql.Driver";
-	      String myUrl = "jdbc:mysql://localhost/test";
-	      Class.forName(myDriver);
-	      Connection conn = DriverManager.getConnection(myUrl, "root", "root1234");
-	      
-	      resultSet = statement.executeQuery(myUrl);
-	      writeResultSet(resultSet);
-	      
-	      PreparedStatement ps =conn.prepareStatement("select * from table1 where email ='merazul@gmail.com' And password = 'merazul123'");
-
-	      resultSet = preparedStatement.executeQuery();
-	      writeResultSet(resultSet);
-	    
+	{  
 	
-		 int i=ps.executeUpdate();
-	        if(i>0)
+		
+		String Email="em";
+		Email=request.getParameter("em");
+		String Password="pw";
+		Password =request.getParameter("pw");
+		
+		// TODO Auto-generated method stub
+		 Connection con = null;
+	        PreparedStatement ps = null;
+	        try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	     
+	         try {
+	            con = DriverManager.getConnection("jdbc:mysql://localhost/db", "root", "root1234");
+	            ps = con.prepareStatement("select * from table1 where emailid =? And password = ?");
+	            ps.setString(1, Email);
+	            ps.setString(2, Password);
+	          ps.executeQuery();
+	       if (con!=null)
+	       {
 	       System.out.println("Successfully LogIn");
-	  }catch(Exception e)
+	       response.sendRedirect("WelcomePage");  
+
+
+	       }
+	    }
+	       catch(Exception e)
 	  {
 	      System.out.println(e.getMessage());
 	  }
 	            }
 	      
-	 
 	
 	
 	private void writeResultSet(ResultSet resultSet2) {

@@ -9,26 +9,21 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-	<display-name>Login</display-name>
-	
-	<servlet>
-	<servlet-name>SecondPage</servlet-name>
-	<servlet-class>com.webapp02.servlet.SecondPage</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-	<servlet-name>SecondPage</servlet-name>
-	<url-pattern>/next1</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-	<servlet-name>SecondPage1</servlet-name>
-	<servlet-class>com.webapp02.servlet.SecondPage1</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-	<servlet-name>SecondPage1</servlet-name>
-	<url-pattern>/next2</url-pattern>
-	</servlet-mapping>   
+  <display-name>Login</display-name>
+  <servlet>
+    <servlet-name>SecondPage</servlet-name>
+    <servlet-class>com.webapp02.servlet.SecondPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SecondPage</servlet-name>
+    <url-pattern>/next1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SecondPage1</servlet-name>
+    <servlet-class>com.webapp02.servlet.SecondPage1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SecondPage1</servlet-name>
+    <url-pattern>/next2</url-pattern>
+  </servlet-mapping>
 </web-app>

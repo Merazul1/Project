@@ -33,16 +33,11 @@ public class SecondPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		String FirstName="fname";
 		FirstName=request.getParameter("fname");
 		String LastName="lname";
-		FirstName=request.getParameter("lname");
+		LastName=request.getParameter("lname");
 		String EmailId="em";
 		EmailId=request.getParameter("em");
 		String MobileNo="mb";
@@ -50,20 +45,32 @@ public class SecondPage extends HttpServlet {
 		String Password="pw";
 		Password=request.getParameter("pw");
 		System.out.println(FirstName+"   "+LastName+" "+"  "+ EmailId+"  "+MobileNo+"   "+Password);
+		
+		
         Connection con = null;
         PreparedStatement stmt = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db", "root", "root1234");
-            stmt = con.prepareStatement("INSERT INTO db.table1(fname,lname,emailid,mobileno,password) VALUES (?,?,?,?,?)");
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost/db", "root", "root1234");
+            stmt = con.prepareStatement("INSERT INTO db.table1(firstname,lastname,emailid,mobileno,password) VALUES (?,?,?,?,?)");
            stmt.setString(1, FirstName);
            stmt.setString(2, LastName);
            stmt.setString(3, EmailId);
            stmt.setString(4, MobileNo);
            stmt.setString(5, Password);
            
-         int i=stmt.executeUpdate();
+           stmt.executeUpdate();
+           if (con != null){
+               System.out.println("Connected to the database");
+                           }
+       /**  int i=stmt.executeUpdate();
         if(i>0)
-       System.out.println("Data is submitted");
+       System.out.println("Data is submitted");*/
   }catch(Exception e)
   {
       System.out.println(e.getMessage());
